@@ -21,8 +21,13 @@ app.get("/", function (req, res) {
 
 
 // your first API endpoint... 
-app.get("/api/hello", function (req, res) {
-  res.json({greeting: 'hello API'});
+app.get("/api/whoami", function (req, res) {
+  const ipAddress = req.socket.remoteAddress.toString();
+  const language = req.headers["accept-language"];
+  const software = req.get('User-Agent');
+  const splittedAddr = ipAddress.split(':');
+  const ipaddress = splittedAddr[splittedAddr.length - 1];
+  res.json({ ipaddress, software, language });
 });
 
 
